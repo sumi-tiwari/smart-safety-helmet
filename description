@@ -1,0 +1,70 @@
+Smart Safety Helmet
+
+[Smart Helmet Banner](images/helmet_banner.jpg)
+
+> Ensuring safety through intelligence – A smart helmet designed to protect workers in construction, industrial, and hazardous environments by detecting impact, falls, and motion in real time.
+
+
+
+Short Description
+
+The Smart Safety Helmet is an embedded IoT system integrated with multiple sensors to enhance worker safety. It detects head impacts, falls, and motion status using gyroscope, accelerometer, and PIR sensors. Upon detecting dangerous events, it triggers alerts and can be extended to send data for remote monitoring. A companion website presents the project and can later be connected for real-time data visualization.
+
+
+
+Features
+
+- Fall Detection via MPU6050 (accelerometer + gyroscope)
+- Impact Detection using vibration sensors
+- Motion Monitoring through PIR sensor
+- Alert System via buzzer/LEDs for real-time response
+- Website Interface for public presentation and future IoT integration
+- Modular Design for extensibility (e.g., GPS, WiFi, Bluetooth)
+
+
+
+ Hardware Components
+
+| Component              | Quantity |
+|------------------------|----------|
+| Arduino Uno            | 1        |
+| MPU6050 (Gyro + Accel) | 1        |
+| Vibration Sensor       | 1        |
+| PIR Motion Sensor      | 1        |
+| Buzzer                 | 1        |
+| Jumper Wires           | —        |
+| Breadboard / PCB       | 1        |
+| Safety Helmet Shell    | 1        |
+
+
+ How It Works
+
+1. **Motion Monitoring**: The MPU6050 sensor continuously monitors movement. Sudden changes in acceleration or tilt trigger a possible fall detection.
+2. **Impact Detection**: Vibration sensors detect sudden hits or shocks to the helmet.
+3. **Motion Sensing**: The PIR sensor checks if the person is moving or inactive for long durations.
+4. **Alerts**: On detection of any critical event, a buzzer or LED is activated.
+5. **Website Interface**: A static website provides details about the helmet, components, team, and (future) real-time data display.
+
+
+ How to Set Up and Run
+
+ Arduino Code
+1. Open the `arduino/smart_helmet.ino` file in the Arduino IDE.
+2. Install the **MPU6050** library from Library Manager.
+3. Connect the sensors as per the wiring diagram (not included here).
+4. Upload the code to your Arduino Uno.
+5. Open Serial Monitor to see live data.
+
+ Website
+1. Go to the `website/` folder.
+2. Open `index.html` in any browser.
+3. To host it:
+   - Use **GitHub Pages** (Settings > Pages > Deploy from main)
+   - Or drag-drop to **Netlify** / **Vercel**
+
+
+
+## 📜 License
+
+This project is licensed under the [MIT License](LICENSE).
+
