@@ -1,0 +1,70 @@
+#include <Wire.h>
+#include <MPU6050.h>
+
+MPU6050 mpu;
+
+const int impactSensorPin = 2;
+const int pirSensorPin = 3;
+const int buzzerPin = 8;
+
+void setup() {
+  Serial.begin(9600);
+  
+  // Initialize MPU6050
+  Wire.begin();
+  mpu.initialize();
+  if (mpu.testConnection()) {
+    Serial.println("MPU6050 connected.");
+  } else {
+    Serial.println("MPU6050 connection failed.");
+  }
+
+  // Sensor pin modes
+  pinMode(impactSensorPin, INPUT);
+  pinMode(pirSensorPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+  // Read gyroscope and accelerometer
+  int16_t ax, ay, az;
+  int16_t gx, gy, gz;
+
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+  Serial.print("Accel: ");
+  Serial.print("X=");
+  Serial.print(ax);
+  Serial.print(" | Y=");
+  Serial.print(ay);
+  Serial.print(" | Z=");
+  Serial.print(az);
+
+  Serial.print(" || Gyro: ");
+  Serial.print("X=");
+  Serial.print(gx);
+  Serial.print(" | Y=");
+  Serial.print(gy);
+  Serial.print(" | Z=");
+  Serial.println(gz);
+
+  // Check impact sensor
+  int impact = digitalRead(impactSensorPin);
+  if (impact == HIGH) {
+    Serial.println("⚠️ Impact detected!");
+    digitalWrite(buzzerPin, HIGH);
+    delay(200);
+    digitalWrite(buzzerPin, LOW);
+  }
+
+  // Check PIR motion sensor
+  int motion = digitalRead(pirSensorPin);
+  if (motion == HIGH) {
+    Serial.println("Motion detected.");
+  } else {
+    Serial.println("No motion.");
+  }
+
+  Serial.println("------------------------------------");
+  delay(1000);
+}
